@@ -1,0 +1,23 @@
+.day_wrapper{
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+  width: 160px;
+  height: 100px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-left: 5px;
+}
+.time{
+  width: 80px;
+  height: 20px;
+  box-sizing: border-box;
+  background-image: linear-gradient(to right,#3ec7e0,#526bf4);
+  color: white;
+  text-align: center;
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 400;
+  line-height: 1.23;
+  border-radius: 5px;
+  border: 1px #0E2439 solid;
+}
