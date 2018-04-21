@@ -2,15 +2,16 @@
   display: flex;
   justify-content: center;
   margin: 10px 0px;
+  
 }
 .week_info{
+  width: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background: #20374E;
   border-radius: 5px;
-  padding: 0 20px;
 }
 .week_title{
   font-family: 'Saira Condensed', sans-serif;
@@ -21,4 +22,5 @@
   font-family: 'Saira Condensed', sans-serif;
   font-weight: 400;
   color: #4799eb;
+  text-align: center;
 }

@@ -1,0 +1,66 @@
+.date{
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+.date_title{
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 700;
+  color: #4799eb;
+  background: #20374E;
+  border-radius: 5px;
+}
+.date_month{
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 700;
+  color: #4799eb;
+}
+.date_info{
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.date_week_wrapper{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0px;
+  background: #20374E;
+  border-radius: 5px;
+}
+.date_btn_back{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: #4799eb;
+}
+.date_btn_next{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: #4799eb;
+}
+.date_day_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #20374E;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.date_day{
+  font-family: 'Saira Condensed', sans-serif;
+  font-weight: 400;
+  color: #4799eb;
+  text-align: center;
+  width: 160px;
+  margin-left: 4px;
+}

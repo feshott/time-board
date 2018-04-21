@@ -16,7 +16,7 @@ export default class Day extends Component {
         <div className="time time_2">10:00</div>
         <div className="time time_3">11:00</div>
         <div className="time time_4">12:00</div>
-        <div className="time time_5">13:00</div>
+        <div className="time time_5 time_active">13:00</div>
         <div className="time time_6">14:00</div>
         <div className="time time_7">15:00</div>
         <div className="time time_8">16:00</div>
