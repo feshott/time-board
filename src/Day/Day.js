@@ -5,23 +5,47 @@ export default class Day extends Component {
   constructor(){
     super()
     this.state={
-        
+      reservedList:[
+        ['09:00',false],
+        ['10:00',false],
+        ['11:00',false],
+        ['12:00',false],
+        ['13:00',false],
+        ['14:00',false],
+        ['15:00',false],
+        ['16:00',false],
+        ['17:00',false],
+        ['18:00',false]
+      ]
     }
   }
 
+  toggleReserved=(e)=>{
+    const newReservedList = this.state.reservedList
+
+    newReservedList[e.target.dataset.reserved][1] = !newReservedList[e.target.dataset.reserved][1]
+
+    this.setState({
+      reservedList : newReservedList
+    })
+  }
+
   render(){
+
+    const { reservedList } = this.state
+
     return(
+
       <div className='day_wrapper'>
-        <div className="time time_1">09:00</div>
-        <div className="time time_2">10:00</div>
-        <div className="time time_3">11:00</div>
-        <div className="time time_4">12:00</div>
-        <div className="time time_5 time_active">13:00</div>
-        <div className="time time_6">14:00</div>
-        <div className="time time_7">15:00</div>
-        <div className="time time_8">16:00</div>
-        <div className="time time_9">17:00</div>
-        <div className="time time_10">18:00</div>
+
+        {reservedList.map((e,index)=>{
+          return  <div  key={index}
+                        data-reserved={index} 
+                        onClick={this.toggleReserved}
+                        className={`time time_${index+1} ${ e[1] ? 'time_reserved' : '' }`}>{e[0]}
+                  </div>
+        })}
+
       </div>
     );
   }

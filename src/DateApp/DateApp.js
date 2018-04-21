@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import './DateApp.css';
 
 export default class DateApp extends Component {
-  constructor(){
-    super()
-  }
+  // constructor(){
+  //   super()
+  // }
 
   render(){
     return(
