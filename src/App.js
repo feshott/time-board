@@ -5,11 +5,11 @@ import './App.css';
 
 export default class App extends Component {
   state = {
-    reservedTime: []
+    reservedTime: [],
+    weekState: 0
   }
 
   toggleReserved = (e) => {
-
     const nowReservedTime = this.state.reservedTime
     const resevedTimeData = +e.target.dataset.time
     if (resevedTimeData && (nowReservedTime.indexOf(resevedTimeData) !== -1)) {
@@ -25,6 +25,22 @@ export default class App extends Component {
     }
   }
 
+  handleWeek = (e) => {
+    let nowWeekState = this.state.weekState
+
+    if (e.target.dataset.week == 'back') {
+      nowWeekState = nowWeekState - 604800000
+      this.setState({
+        weekState: nowWeekState
+      })
+    }
+    if (e.target.dataset.week == 'next') {
+      nowWeekState = nowWeekState + 604800000
+      this.setState({
+        weekState: nowWeekState
+      })
+    }
+  }
   // получаем понедельник 9 утра в неделе нашей даты в милисекундах
   setMonday = () => {
     // Получаем сегодняшнюю дату
@@ -52,11 +68,11 @@ export default class App extends Component {
     const startDayMonday = this.setMonday()
     return (
       <div className="App">
-        <DateApp />
+        <DateApp setWeekFunction={this.handleWeek} />
         <Week
           reservedTime={this.state.reservedTime}
           timeFunction={this.toggleReserved}
-          startTime={startDayMonday}
+          startTime={startDayMonday + this.state.weekState}
           roomName={'Синяя'}
           roomMaxPeople={'10'} />
       </div>

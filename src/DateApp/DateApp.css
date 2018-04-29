@@ -41,6 +41,8 @@
   width: 40px;
   height: 40px;
   color: #4799eb;
+  cursor: pointer;
+  user-select: none;
 }
 .date_btn_next{
   display: flex;
@@ -49,6 +51,8 @@
   width: 40px;
   height: 40px;
   color: #4799eb;
+  cursor: pointer;
+  user-select: none;
 }
 .date_day_wrapper{
   display: flex;
