@@ -5,26 +5,25 @@ import './App.css';
 
 export default class App extends Component {
   state = {
-    reservedTime : []
+    reservedTime: []
   }
 
-  toggleReserved=(e)=>{
+  toggleReserved = (e) => {
 
     const nowReservedTime = this.state.reservedTime
-    const resevedTimeData = e.target.dataset.time
-    if(resevedTimeData && (nowReservedTime.indexOf(resevedTimeData) !== -1)){
+    const resevedTimeData = +e.target.dataset.time
+    if (resevedTimeData && (nowReservedTime.indexOf(resevedTimeData) !== -1)) {
       nowReservedTime.splice(nowReservedTime.indexOf(resevedTimeData), 1)
       this.setState({
-        reservedTime : nowReservedTime
+        reservedTime: nowReservedTime
       })
-    }else if(resevedTimeData){
+    } else if (resevedTimeData) {
       nowReservedTime.push(+resevedTimeData)
       this.setState({
-        reservedTime : nowReservedTime
+        reservedTime: nowReservedTime
       })
     }
   }
-
 
   // получаем понедельник 9 утра в неделе нашей даты в милисекундах
   setMonday = () => {
@@ -54,11 +53,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <DateApp />
-        <Week 
+        <Week
           reservedTime={this.state.reservedTime}
           timeFunction={this.toggleReserved}
-          startTime={startDayMonday} 
-          roomName={'Синяя'} 
+          startTime={startDayMonday}
+          roomName={'Синяя'}
           roomMaxPeople={'10'} />
       </div>
     );

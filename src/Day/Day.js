@@ -21,25 +21,40 @@ export default class Day extends Component {
     }
   }
 
+  setDayWeek = (time) => {
+    const nowDay = new Date(time)
+
+    const weekDay = [
+      'Воскресение',
+      'Понедельник',
+      'Вторник',
+      'Среда',
+      'Четверг',
+      'Пятница'
+    ]
+
+    return (nowDay.getDate() + ' ' + weekDay[nowDay.getDay()])
+  }
+
   render() {
     const { reservedList } = this.state
 
-    console.log(this.state.reservedTime)
     return (
+      <div className="day_wrapper">
 
-      <div className='day_wrapper'>
+        <div className="day_info">{this.setDayWeek(this.props.dayTime)}</div>
 
-        {reservedList.map((e, index) => {
-          return <div
-            key={index}
-            data-reserved={index}
-            data-time={this.props.dayTime + (index * 3600000)}
-            onClick={this.props.timeFunctionWeek}
-            className={`time time_${index + 1} ${(this.state.reservedTime.indexOf(this.props.dayTime + (index * 3600000))) !== -1 ? 'time_reserved' : ''}`}>{e}
-
-          </div>
-        })}
-
+        <div className='day_time_wrapper'>
+          {reservedList.map((e, index) => {
+            return <div
+              key={index}
+              data-reserved={index}
+              data-time={this.props.dayTime + (index * 3600000)}
+              onClick={this.props.timeFunctionWeek}
+              className={`time time_${index + 1} ${(this.state.reservedTime.indexOf(this.props.dayTime + (index * 3600000))) !== -1 ? 'time_reserved' : ''}`}>{e}
+            </div>
+          })}
+        </div>
       </div>
     );
   }

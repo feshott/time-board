@@ -1,4 +1,4 @@
-.date{
+.date_wrapper{
   display: flex;
   justify-content: center;
   margin: 10px 0px;
@@ -31,6 +31,8 @@
   padding: 15px 0px;
   background: #20374E;
   border-radius: 5px;
+  width: 820px;
+  margin-left: 5px;
 }
 .date_btn_back{
   display: flex;
