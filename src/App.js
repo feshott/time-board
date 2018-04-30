@@ -64,13 +64,16 @@ export default class App extends Component {
     const nowMonday = dayCounter[dayNow]
     return nowMonday
   }
+  
 
   render() {
     const startDayMonday = this.setMonday()
 
     return (
       <div className="App">
-        <DateApp setWeekFunction={this.handleWeek} />
+        <DateApp
+          monthName={startDayMonday + this.state.weekState}
+          setWeekFunction={this.handleWeek} />
         <Week
           reservedTime={this.state.reservedTime}
           timeFunction={this.toggleReserved}
