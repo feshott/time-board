@@ -49,16 +49,17 @@ export default class App extends Component {
     const correctDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 9)
     // Получаем 9 утра нашей даты в миллисекундах
     const correctDateMiliseconds = correctDate.getTime()
-    const dayNow = nowDate.getDay() + 7
+    const dayNow = nowDate.getDay() 
     // 24 часа == 86400000 миллисекунд
     const dayCounter = {
-      1: null,
+      0: (correctDateMiliseconds - (6 * (86400000))),
+      1: correctDateMiliseconds,
       2: (correctDateMiliseconds - (86400000)),
       3: (correctDateMiliseconds - (2 * (86400000))),
       4: (correctDateMiliseconds - (3 * (86400000))),
       5: (correctDateMiliseconds - (4 * (86400000))),
       6: (correctDateMiliseconds - (5 * (86400000))),
-      7: (correctDateMiliseconds - (6 * (86400000))),
+
     }
     const nowMonday = dayCounter[dayNow]
     return nowMonday
@@ -66,6 +67,7 @@ export default class App extends Component {
 
   render() {
     const startDayMonday = this.setMonday()
+
     return (
       <div className="App">
         <DateApp setWeekFunction={this.handleWeek} />
