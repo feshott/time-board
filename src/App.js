@@ -5,20 +5,26 @@ import './App.css';
 
 export default class App extends Component {
   state = {
-    reservedTime: [],
+    reservedTime: {
+      Синяя : [],
+      Красная : [],
+      Желтая : [],
+      Зеленая : []
+    },
     weekState: 0
   }
 
   toggleReserved = (e) => {
     const nowReservedTime = this.state.reservedTime
     const resevedTimeData = +e.target.dataset.time
-    if (resevedTimeData && (nowReservedTime.indexOf(resevedTimeData) !== -1)) {
-      nowReservedTime.splice(nowReservedTime.indexOf(resevedTimeData), 1)
+    const resevedRoomName = e.target.dataset.room
+    if (resevedTimeData && (nowReservedTime[resevedRoomName].indexOf(resevedTimeData) !== -1)) {
+      nowReservedTime[resevedRoomName].splice(nowReservedTime[resevedRoomName].indexOf(resevedTimeData), 1)
       this.setState({
         reservedTime: nowReservedTime
       })
     } else if (resevedTimeData) {
-      nowReservedTime.push(+resevedTimeData)
+      nowReservedTime[resevedRoomName].push(+resevedTimeData)
       this.setState({
         reservedTime: nowReservedTime
       })
@@ -49,7 +55,7 @@ export default class App extends Component {
     const correctDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate(), 9)
     // Получаем 9 утра нашей даты в миллисекундах
     const correctDateMiliseconds = correctDate.getTime()
-    const dayNow = nowDate.getDay() 
+    const dayNow = nowDate.getDay()
     // 24 часа == 86400000 миллисекунд
     const dayCounter = {
       0: (correctDateMiliseconds - (6 * (86400000))),
@@ -64,7 +70,7 @@ export default class App extends Component {
     const nowMonday = dayCounter[dayNow]
     return nowMonday
   }
-  
+
 
   render() {
     const startDayMonday = this.setMonday()
@@ -80,6 +86,24 @@ export default class App extends Component {
           startTime={startDayMonday + this.state.weekState}
           roomName={'Синяя'}
           roomMaxPeople={'10'} />
+        <Week
+          reservedTime={this.state.reservedTime}
+          timeFunction={this.toggleReserved}
+          startTime={startDayMonday + this.state.weekState}
+          roomName={'Красная'}
+          roomMaxPeople={'15'} />
+        <Week
+          reservedTime={this.state.reservedTime}
+          timeFunction={this.toggleReserved}
+          startTime={startDayMonday + this.state.weekState}
+          roomName={'Желтая'}
+          roomMaxPeople={'5'} />
+        <Week
+          reservedTime={this.state.reservedTime}
+          timeFunction={this.toggleReserved}
+          startTime={startDayMonday + this.state.weekState}
+          roomName={'Зеленая'}
+          roomMaxPeople={'25'} />
       </div>
     );
   }

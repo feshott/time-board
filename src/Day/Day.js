@@ -48,10 +48,11 @@ export default class Day extends Component {
           {reservedList.map((e, index) => {
             return <div
               key={index}
+              data-room={this.props.roomName}
               data-reserved={index}
               data-time={this.props.dayTime + (index * 3600000)}
               onClick={this.props.timeFunctionWeek}
-              className={`time time_${index + 1} ${(this.state.reservedTime.indexOf(this.props.dayTime + (index * 3600000))) !== -1 ? 'time_reserved' : ''}`}>{e}
+              className={`time time_${index + 1} ${(this.state.reservedTime[this.props.roomName].indexOf(this.props.dayTime + (index * 3600000))) !== -1 ? 'time_reserved' : ''}`}>{e}
             </div>
           })}
         </div>

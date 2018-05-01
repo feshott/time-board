@@ -21,23 +21,28 @@ export default class Week extends Component {
         <Day
           reservedTime={this.props.reservedTime}
           timeFunctionWeek={this.props.timeFunction}
-          dayTime={this.props.startTime} />
+          dayTime={this.props.startTime}
+          roomName={this.props.roomName} />
         <Day
           reservedTime={this.props.reservedTime}
           timeFunctionWeek={this.props.timeFunction}
-          dayTime={this.props.startTime + 86400000} />
+          dayTime={this.props.startTime + 86400000}
+          roomName={this.props.roomName} />
         <Day
           reservedTime={this.props.reservedTime}
           timeFunctionWeek={this.props.timeFunction}
-          dayTime={this.props.startTime + 86400000 * 2} />
+          dayTime={this.props.startTime + 86400000 * 2}
+          roomName={this.props.roomName} />
         <Day
           reservedTime={this.props.reservedTime}
           timeFunctionWeek={this.props.timeFunction}
-          dayTime={this.props.startTime + 86400000 * 3} />
+          dayTime={this.props.startTime + 86400000 * 3}
+          roomName={this.props.roomName} />
         <Day
           reservedTime={this.props.reservedTime}
           timeFunctionWeek={this.props.timeFunction}
-          dayTime={this.props.startTime + 86400000 * 4} />
+          dayTime={this.props.startTime + 86400000 * 4}
+          roomName={this.props.roomName} />
       </div>
     );
   }
