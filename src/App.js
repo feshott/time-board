@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Week from './Week/Week';
 import DateApp from './DateApp/DateApp';
 import './App.css';
+import rooms from './data/rooms'
 
 export default class App extends Component {
   state = {
@@ -15,38 +16,31 @@ export default class App extends Component {
   }
 
   toggleReserved = (e) => {
-    const nowReservedTime = this.state.reservedTime
+    const reservedTime = this.state.reservedTime
     const resevedTimeData = +e.target.dataset.time
     const resevedRoomName = e.target.dataset.room
-    if (resevedTimeData && (nowReservedTime[resevedRoomName].indexOf(resevedTimeData) !== -1)) {
-      nowReservedTime[resevedRoomName].splice(nowReservedTime[resevedRoomName].indexOf(resevedTimeData), 1)
-      this.setState({
-        reservedTime: nowReservedTime
-      })
+
+    if (resevedTimeData && (reservedTime[resevedRoomName].indexOf(resevedTimeData) !== -1)) {
+      reservedTime[resevedRoomName].splice(reservedTime[resevedRoomName].indexOf(resevedTimeData), 1)
+      this.setState({ reservedTime })
     } else if (resevedTimeData) {
-      nowReservedTime[resevedRoomName].push(+resevedTimeData)
-      this.setState({
-        reservedTime: nowReservedTime
-      })
+      reservedTime[resevedRoomName].push(+resevedTimeData)
+      this.setState({ reservedTime })
     }
   }
 
   handleWeek = (e) => {
-    let nowWeekState = this.state.weekState
-
-    if (e.target.dataset.week == 'back') {
-      nowWeekState = nowWeekState - 604800000
-      this.setState({
-        weekState: nowWeekState
-      })
+    const action = e.target.dataset.week
+    let weekState = this.state.weekState
+    
+    if (action === 'back') {
+      weekState -=  604800000
+    } else if (action === 'next') {
+      weekState += 604800000
     }
-    if (e.target.dataset.week == 'next') {
-      nowWeekState = nowWeekState + 604800000
-      this.setState({
-        weekState: nowWeekState
-      })
-    }
+    this.setState({ weekState })
   }
+  
   // получаем понедельник 9 утра в неделе нашей даты в милисекундах
   setMonday = () => {
     // Получаем сегодняшнюю дату
@@ -65,45 +59,31 @@ export default class App extends Component {
       4: (correctDateMiliseconds - (3 * (86400000))),
       5: (correctDateMiliseconds - (4 * (86400000))),
       6: (correctDateMiliseconds - (5 * (86400000))),
-
     }
-    const nowMonday = dayCounter[dayNow]
-    return nowMonday
+
+    return dayCounter[dayNow]
   }
 
 
   render() {
     const startDayMonday = this.setMonday()
+    const { weekState, reservedTime } = this.state
 
     return (
       <div className="App">
         <DateApp
-          monthName={startDayMonday + this.state.weekState}
+          monthName={startDayMonday + weekState}
           setWeekFunction={this.handleWeek} />
-        <Week
-          reservedTime={this.state.reservedTime}
-          timeFunction={this.toggleReserved}
-          startTime={startDayMonday + this.state.weekState}
-          roomName={'Синяя'}
-          roomMaxPeople={'10'} />
-        <Week
-          reservedTime={this.state.reservedTime}
-          timeFunction={this.toggleReserved}
-          startTime={startDayMonday + this.state.weekState}
-          roomName={'Красная'}
-          roomMaxPeople={'15'} />
-        <Week
-          reservedTime={this.state.reservedTime}
-          timeFunction={this.toggleReserved}
-          startTime={startDayMonday + this.state.weekState}
-          roomName={'Желтая'}
-          roomMaxPeople={'5'} />
-        <Week
-          reservedTime={this.state.reservedTime}
-          timeFunction={this.toggleReserved}
-          startTime={startDayMonday + this.state.weekState}
-          roomName={'Зеленая'}
-          roomMaxPeople={'25'} />
+
+        {new Array(4).fill('').map((el, i) => 
+          <Week
+            key={i}
+            reservedTime={reservedTime}
+            timeFunction={this.toggleReserved}
+            startTime={startDayMonday + weekState}
+            roomName={rooms[i].name}
+            roomMaxPeople={rooms[i].maxPeople} />)
+        }
       </div>
     );
   }

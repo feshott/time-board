@@ -1,43 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './DateApp.css';
 
-export default class DateApp extends Component {
+const DateApp = ({ monthName, setWeekFunction }) => {
 
-  setNameMonth = (time) => {
+  const setNameMonth = (time) => {
     const nowDay = new Date(time)
+    const monthName = nowDay.toLocaleString('ru', {month: 'long'})
 
-    const monthNameArr = [
-      'Январь',
-      'Февраль', 
-      'Март', 
-      'Апрель', 
-      'Май', 
-      'Июнь', 
-      'Июль', 
-      'Август', 
-      'Сентябрь', 
-      'Октябрь', 
-      'Ноябрь', 
-      'Декабрь'
-    ]
-
-    return (monthNameArr[nowDay.getMonth()])
+    return `${monthName.charAt(0).toUpperCase() + monthName.slice(1)}`
   }
 
-  render() {
-    const monthName = this.setNameMonth(this.props.monthName)
-    return (
-      <div className='date_wrapper'>
+  return (
+    <div className='date_wrapper'>
 
-        <div className="date_title">Комната</div>
+      <div className="date_title">Комната</div>
 
-        <div className="date_week_wrapper">
-          <div data-week='back' onClick={this.props.setWeekFunction} className="date_btn_back">&#9668;</div>
-          <div className="date_month">{monthName}</div>
-          <div data-week='next' onClick={this.props.setWeekFunction} className="date_btn_next">&#9658;</div>
-        </div>
-
+      <div className="date_week_wrapper">
+        <div data-week='back' onClick={setWeekFunction} className="date_btn_back">&#9668;</div>
+        <div className="date_month">{setNameMonth(monthName)}</div>
+        <div data-week='next' onClick={setWeekFunction} className="date_btn_next">&#9658;</div>
       </div>
-    );
-  }
+
+    </div>)
 }
+
+export default DateApp
