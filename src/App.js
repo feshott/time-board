@@ -15,6 +15,15 @@ export default class App extends Component {
     weekState: 0
   }
 
+  componentWillMount(){
+    let localReservedTime = JSON.parse(localStorage.getItem('reservedTime'))
+    if(localReservedTime){
+      this.setState({
+        reservedTime : localReservedTime
+      })
+    }
+  }
+
   toggleReserved = (e) => {
     const reservedTime = this.state.reservedTime
     const resevedTimeData = +e.target.dataset.time
@@ -27,6 +36,7 @@ export default class App extends Component {
       reservedTime[resevedRoomName].push(+resevedTimeData)
       this.setState({ reservedTime })
     }
+    localStorage.setItem('reservedTime',JSON.stringify(reservedTime))
   }
 
   handleWeek = (e) => {
